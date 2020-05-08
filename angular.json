@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -123,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "codeUdemy"
+    }
+  },
+  "defaultProject": "codeUdemy",
+  "cli": {
+    "analytics": "6fbe5d43-833c-479b-9640-ef82853157a2"
+  }
 }
