@@ -8,15 +8,15 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   title = 'codeUdemy';
-  jogoEmAndamento: boolean = true;
+  jogoEmAndamento = true;
   resultado: string;
 
-  encerrarJogo(resultado: string):void{
+  encerrarJogo(resultado: string): void{
     this.jogoEmAndamento = false;
     this.resultado = resultado;
   }
-  public reiniciarJogo():void{
-    this.jogoEmAndamento = true
-    this.resultado = undefined
+  public reiniciarJogo(): void{
+    this.jogoEmAndamento = true;
+    this.resultado = undefined;
   }
 }

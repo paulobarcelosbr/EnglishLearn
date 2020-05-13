@@ -11,62 +11,57 @@ import { FRASES } from './frases-mock';
 export class PainelComponent implements OnInit {
 
    frases: Frase[] = FRASES;
-   instrucao: string = 'Traduza a frase'
-   resposta: string = '';
+   instrucao = 'Traduza a frase';
+   resposta = '';
 
-   rodada:number = 0
+   rodada = 0;
    rodadaFrase: Frase;
-   progresso:number = 0;
+   progresso = 0;
 
-   tentativas:number = 3;
-   
+   tentativas = 3;
    @Output() encerrarJogo: EventEmitter<string> = new EventEmitter();
 
-  constructor() { 
-  }
+  constructor() {}
 
   ngOnInit(): void {
-    this.atualizaRodada()
+    this.atualizaRodada();
   }
   atualizaResposta(resposta: Event): void{
-    this.resposta = (<HTMLInputElement>resposta.target).value;
+    this.resposta = (resposta.target as HTMLInputElement).value;
   }
-  verificarReposta():void{
-      //Realiza o teste de tradução.
-    if(this.rodadaFrase.frasePtbr == this.resposta){
-      alert(' A tradução está correta!!')
+  verificarReposta(): void{
+      // Realiza o teste de tradução.
+    if (this.rodadaFrase.frasePtbr === this.resposta){
+      alert(' A tradução está correta!!');
 
-      //troca pergunda da rodada
-      this.rodada++
-      
-      //incrementa barra de progresso
-      this.progresso = this.progresso + (100 / this.frases.length);      
+      // troca pergunda da rodada
+      this.rodada++;
+      // incrementa barra de progresso
+      this.progresso = this.progresso + (100 / this.frases.length);
 
-      if(this.rodada == 4){
-        this.encerrarJogo.emit('vitoria')
+      if (this.rodada === 4){
+        this.encerrarJogo.emit('vitoria');
       }
 
-      this.atualizaRodada()
+      this.atualizaRodada();
     }else{
       alert('A tradução está errada!!');
 
-      //diminuir a variavel tentativas 
+      // diminuir a variavel tentativas
       this.tentativas--;
-      
-      //verificação se o usuario possui vidas.
-      if(this.tentativas === -1){
-        this.encerrarJogo.emit('derrota')
+      // verificação se o usuario possui vidas.
+      if (this.tentativas === -1){
+        this.encerrarJogo.emit('derrota');
       }
 
-      //limpar a resposta
-      this.atualizaRodada()
-    }  
+      // limpar a resposta
+      this.atualizaRodada();
+    }
   }
-  atualizaRodada():void{
-    //define a frase da rodada
+  atualizaRodada(): void{
+    // define a frase da rodada
     this.rodadaFrase = this.frases[this.rodada];
-    
-    //limpar a resposta
+    // limpar a resposta
     this.resposta = '';
   }
 }
