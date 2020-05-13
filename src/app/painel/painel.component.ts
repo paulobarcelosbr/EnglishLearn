@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Frase } from '../shared/fase.model';
 import { FRASES } from './frases-mock';
+
 
 @Component({
   selector: 'app-painel',
@@ -18,6 +19,8 @@ export class PainelComponent implements OnInit {
    progresso:number = 0;
 
    tentativas:number = 3;
+   
+   @Output() encerrarJogo: EventEmitter<string> = new EventEmitter();
 
   constructor() { 
   }
@@ -39,6 +42,10 @@ export class PainelComponent implements OnInit {
       //incrementa barra de progresso
       this.progresso = this.progresso + (100 / this.frases.length);      
 
+      if(this.rodada == 4){
+        this.encerrarJogo.emit('vitoria')
+      }
+
       this.atualizaRodada()
     }else{
       alert('A tradução está errada!!');
@@ -48,7 +55,7 @@ export class PainelComponent implements OnInit {
       
       //verificação se o usuario possui vidas.
       if(this.tentativas === -1){
-        alert('Você Perdeu Todas as Vidas!')
+        this.encerrarJogo.emit('derrota')
       }
 
       //limpar a resposta

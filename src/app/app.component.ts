@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   title = 'codeUdemy';
+  jogoEmAndamento: boolean = true;
+  resultado: string;
+
+  encerrarJogo(resultado: string):void{
+    this.jogoEmAndamento = false;
+    this.resultado = resultado;
+  }
+  public reiniciarJogo():void{
+    this.jogoEmAndamento = true
+    this.resultado = undefined
+  }
 }
